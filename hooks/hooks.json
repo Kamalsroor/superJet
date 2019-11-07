@@ -1,0 +1,29 @@
+{
+    "last_remote_check": 1573145332,
+    "hooks": {
+        "bread-templates": {
+            "name": "bread-templates",
+            "description": "Templating BREAD Views",
+            "version": "1.0.13",
+            "enabled": false
+        },
+        "voyager-bread-generator": {
+            "name": "voyager-bread-generator",
+            "description": "Create BREAD from the console using artisan",
+            "version": "dev-master",
+            "enabled": true
+        },
+        "bread-form-fields": {
+            "name": "bread-form-fields",
+            "description": "Extended FormFields hook interface to Voyager BREAD",
+            "version": "dev-master",
+            "enabled": true
+        },
+        "extended-bread-form-fields": {
+            "name": "extended-bread-form-fields",
+            "description": "Extended FormFields hook interface to Voyager BREAD",
+            "version": "v0.2-beta",
+            "enabled": true
+        }
+    }
+}
