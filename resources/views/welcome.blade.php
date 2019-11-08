@@ -241,11 +241,11 @@
                                             <p class="text">be born again</p>
                                             <i class="icons flaticon-people"></i>
                                         </div>
-                                        <h2 class="main-title">{{setting('about.about')}}</h2>
+                                        <h2 class="main-title">{{setting('about.about-'.Lang::locale())}}</h2>
                                     </div>
 
                                     <div class="about-us-wrapper">
-                                        {!!  setting('about.content')!!}
+                                        {!!  setting('about.content-'.Lang::locale())!!}
                                     </div>
                                         <div class="group-button">
     

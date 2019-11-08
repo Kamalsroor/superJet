@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index');
 Route::get('/job', 'HomeController@Jobs')->name('job');
 Route::get('/job/contact', 'HomeController@JobContent')->name('job.contact');
+Route::post('/job/contact', 'HomeController@JobContentStore')->name('job.JobContentStore');
+
 // Route::get('/{lang}', function ($lang) {
 //     App::setLocale($lang);
 //     'locale' => 'ar'
