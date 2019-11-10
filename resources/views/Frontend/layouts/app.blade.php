@@ -173,18 +173,10 @@
                                                 <span class="text">@lang('site.home')</span>
                                             </a>
                                         </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="main-menu">
+                                        <li class="{{active_link('about')}}">
+                                            <a href="{{route('about')}}" class="main-menu">
                                                 <span class="text">SuperJet</span>
                                             </a>
-                                            <ul class="dropdown-menu dropdown-menu-1">
-                                                <li>
-                                                    <a href="tour-result.html" class="link-page">tour result</a>
-                                                </li>
-                                                <li>
-                                                    <a href="tour-view.html" class="link-page">tour view</a>
-                                                </li>
-                                            </ul>
                                         </li>
                                         <li>
                                             <a href="javascript:void(0)" class="main-menu">

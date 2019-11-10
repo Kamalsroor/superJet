@@ -260,15 +260,6 @@
 <script src="{{ asset('assets/libs/fancybox/js/jquery.fancybox-thumbs.js')}}"></script>
 <script src="{{ asset('assets/libs/mouse-direction-aware/jquery.directional-hover.js')}}"></script>
 <script src="{{ asset('assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
-<script>
-        var logo_str = 'assets/images/logo/logo-black-color-1.png';
-      
-        window.loading_screen = window.pleaseWait(
-        {
-            logo: logo_str,
-            backgroundColor: '#fff',
-            loadingHtml: "<div class='spinner sk-spinner-wave'><div class='rect1'></div><div class='rect2'></div><div class='rect3'></div><div class='rect4'></div><div class='rect5'></div></div>",
-        });
-    </script>
+
 @endsection
 
