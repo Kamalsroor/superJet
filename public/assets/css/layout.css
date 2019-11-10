@@ -709,7 +709,7 @@ a:hover {
 
 .header-01 .header-main .dropdown-menu-1,
 .header-01 .header-main .nav-search {
-    top: 34px;
+    top: 23px;
 }
 
 .header-01 .header-main.header-fixed .navbar-header {
@@ -733,6 +733,8 @@ a:hover {
 .header-01 .header-main.header-fixed .dropdown-menu-1,
 .header-01 .header-main.header-fixed .nav-search {
     top: 50px;
+    /* top: 23px; */
+
 }
 
 .header-01 .navigation .nav-links {

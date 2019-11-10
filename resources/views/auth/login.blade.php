@@ -1,3 +1,64 @@
+
+@extends('Frontend.layouts.auth')
+
+@section('content')
+
+<section class="page-login">
+    <div class="container wrapper-login">
+        <div class="content-login">
+            <div class="main-login">
+                <div class="logo-login">
+                    <a href="index-2.html" class="logo-black">
+                        <img src="assets/images/logo/logo-black-color-1.png" alt="" class="img img-reponsive">
+                    </a>
+                </div>
+                <div class="login-title">login in!</div>
+                    <div class="login-form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="form-login">
+                                <div class="input-login">
+                                    <label class="label-login">email
+                                        <i class="form-icon fa fa-asterisk"></i>
+                                    </label>
+                                    <input type="email" name="email" class="form-control label-input">
+                                </div>
+                                <div class="input-login">
+                                    <label class="label-login">password
+                                        <i class="form-icon fa fa-asterisk"></i>
+                                    </label>
+                                    <input type="password"  name="password" class="form-control label-input">
+                                </div>
+                                <div class="contact-submit">
+                                    <button type="submit" data-hover="SEND NOW" class="btn btn-slide">
+                                        <span class="text">sign in</span>
+                                        <span class="icons fa fa-long-arrow-right"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@endsection
+
+
+
+
+
+
+{{-- 
+
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -70,4 +131,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

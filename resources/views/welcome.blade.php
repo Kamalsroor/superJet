@@ -6,9 +6,9 @@
                             <div class="homepage-banner-warpper">
                                 <div class="homepage-banner-content">
                                     <div class="group-title">
-                                        <h1 class="title">super jet</h1>
+                                        <h1 class="title">{{setting('site.title-'.Lang::locale())}}</h1>
                                         {{-- <h1 class="title">{{ trans('date.this_year')}} </h1> --}}
-                                        <p class="text">Book your seat in Super Jet now
+                                        <p class="text">{{setting('site.description-'.Lang::locale())}}
                                             <span class="boder"></span>
                                         </p>
                                     </div>
@@ -270,7 +270,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="video-wrapper padding-top padding-bottom">
-                                        {!! setting('home-page.content') !!}
+                                        {!! setting('home-page.content-'.Lang::locale()) !!}
                                         {{-- <h5 class="sub-title">it’s a
                                             <strong>big world</strong> out there</h5>
                                         <h2 class="title">go super jet</h2>

@@ -7,6 +7,10 @@ use App\HappyTraveler;
 use App\Bus;
 use App\Job;
 use App\JobContent;
+use App\Complaint;
+use App\Contacte;
+use App\About;
+
 use App;
 // use Storage;
 use Illuminate\Support\Arr;
@@ -36,7 +40,22 @@ class HomeController extends Controller
         return view('welcome',compact('HappyTraveler','Bus'));
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function ContactUs($page)
+    {
+        $Contactes = Contacte::whereTranslation('branch_name' , $page)->with('translations')->get()->translate(app()->getLocale())->first();
+        // dd($Contactes);
+        // $HappyTraveler = HappyTraveler::get()->take(4)->translate(app()->getLocale());
+        return view('Contacte',compact('Contactes'));
+    }
 
+
+
+    
 
     /**
      * Show the application dashboard.
@@ -49,6 +68,17 @@ class HomeController extends Controller
         return view('job',compact('Jobs'));
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function About()
+    {
+        $About = About::with('translations')->get()->translate(app()->getLocale());
+        return view('about',compact('About'));
+    }
+
     /** 
      * Show the application dashboard.
      *
@@ -59,6 +89,19 @@ class HomeController extends Controller
         // $Jobs = Job::with('translations')->get()->translate(app()->getLocale());
         return view('JobContent');
     }
+
+    /** 
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function Complaints()
+    {
+        // $Jobs = Job::with('translations')->get()->translate(app()->getLocale());
+        return view('Complaints');
+    }
+
+    
 
 
     public function lang($locale)
@@ -107,9 +150,35 @@ class HomeController extends Controller
             $record->comment = $request->input('comment');
             $record->save();
         // flash()->success('تــم اضــافة القسم بنجــاح');
-        return redirect(route('job.contact'));
+        return redirect(route('job.contact'))->with('success', 'You have done successfully');
     }
 
+
+
+    public function ComplaintsStore(Request $request)
+    {
+        $rules = [
+            'fname' => 'required',
+            'lname' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'comment' => 'required',
+            'type' => 'required',
+            
+        ];
+        $this->validate($request,$rules);
+        $record = new Complaint;
+        // $record->cv = [{"download_link":"job-contents\/November2019\/","original_name":"about-us-4.png"}];
+            $record->fname = $request->input('fname');
+            $record->lname = $request->input('lname');
+            $record->email = $request->input('email');
+            $record->type = $request->input('type');
+            $record->phone = $request->input('phone');
+            $record->comment = $request->input('comment');
+            $record->save();
+        // flash()->success('تــم اضــافة القسم بنجــاح');
+        return redirect(route('complaints'))->with('success', 'You have done successfully');
+    }
 
 
 

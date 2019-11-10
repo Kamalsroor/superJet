@@ -16,7 +16,16 @@
 <!-- LOADING JS FOR PAGE-->
 <script src="{{ asset('assets/js/pages/home-page.js')}}"></script>
 <script src="{{ asset('assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+@if (Session::has('success'))
+<script>
+        $.notify("{{Session::get('success')}}", "success");
 
+</script>
+    
+@endif
+
+@yield('script')
 </body>
 
 </html>

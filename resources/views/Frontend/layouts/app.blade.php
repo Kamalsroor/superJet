@@ -162,7 +162,7 @@
                                 <div class="navbar-header">
                                     <div class="logo">
                                         <a href="#" class="header-logo">
-                                            <img src="{{ asset('assets/images/logo/logo-white-color-1.png') }}" alt="" />
+                                            <img src="{{ asset('storage/'.setting('site.logo'))}}" alt="" />
                                         </a>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                                     <ul class="nav-links nav navbar-nav">
                                         <li class="dropdown {{active_link('/' , false)}}">
                                             <a href="{{route('home')}}" class="main-menu">
-                                                <span class="text">Home</span>
+                                                <span class="text">@lang('site.home')</span>
                                             </a>
                                         </li>
                                         <li class="dropdown">
@@ -188,7 +188,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void(0)" class="main-menu">
-                                                <span class="text">Servies</span>
+                                                <span class="text">@lang('site.servies')</span>
                                             </a>
                                         </li>
                                         <li>
@@ -206,8 +206,8 @@
                                                 <span class="text">Jobs</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="#" class="main-menu">
+                                        <li class="{{active_link('complaints')}}">
+                                            <a href="{{route('complaints')}}" class="main-menu">
                                                 <span class="text">Complaints and suggestions</span>
                                             </a>
                                         </li>
@@ -215,13 +215,17 @@
                                             <a href="#" class="main-menu">
                                                 <span class="text">contact us</span>
                                             </a>
+                                            
                                             <ul class="dropdown-menu dropdown-menu-1">
+                                                @foreach ($Contacte as $item)
+                                                    
                                                 <li>
-                                                    <a href="tour-result.html" class="link-page">tour result</a>
+                                                    <a href="{{route('ContactUs',$item->branch_name)}}" class="link-page">{{$item->branch_name}}</a>
                                                 </li>
-                                                <li>
+                                                {{-- <li>
                                                     <a href="tour-view.html" class="link-page">tour view</a>
-                                                </li>
+                                                </li> --}}
+                                                @endforeach
                                             </ul>
                                         </li>
                                     </ul>

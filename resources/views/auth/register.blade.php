@@ -1,3 +1,108 @@
+
+@extends('Frontend.layouts.auth')
+
+@section('content')
+
+<section class="page-login">
+    <div class="container wrapper-login">
+        <div class="content-login">
+            <div class="main-login">
+                <div class="logo-login">
+                    <a href="index-2.html" class="logo-black">
+                        <img src="assets/images/logo/logo-black-color-1.png" alt="" class="img img-reponsive">
+                    </a>
+                </div>
+                <div class="login-title">login in!</div>
+                    <div class="login-form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form method="POST" action="{{ route('register') }}">
+                            @csrf
+                            <div class="form-login">
+                                <div class="row">
+                                    <div class="content-form">
+                                        <div class="col-md-6">
+                                            <div class="form-login">
+                                                <div class="input-login">
+                                                    <label class="label-login">name
+                                                        <i class="form-icon fa fa-asterisk"></i>
+                                                    </label>
+                                                    <input type="text" name="name" value="{{ old('name') }}" class="form-control label-input">
+                                                    @error('name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-login">
+                                                <div class="input-login">
+                                                    <label class="label-login">email
+                                                        <i class="form-icon fa fa-asterisk"></i>
+                                                    </label>
+                                                    <input type="email" name="email" value="{{ old('email') }}" class="form-control label-input">
+                                                    @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-login">
+                                                <div class="input-login">
+                                                    <label class="label-login">password
+                                                        <i class="form-icon fa fa-asterisk"></i>
+                                                    </label>
+                                                    <input type="password" name="password" class="form-control label-input">
+                                                
+                                        @error('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-login">
+                                                <div class="input-login">
+                                                    <label class="label-login">confirm password
+                                                        <i class="form-icon fa fa-asterisk"></i>
+                                                    </label>
+                                                    <input type="password" name="password_confirmation" class="form-control label-input">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="contact-submit">
+                                        <button type="submit" data-hover="SEND NOW" class="btn btn-slide">
+                                            <span class="text">create account</span>
+                                            <span class="icons fa fa-long-arrow-right"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@endsection
+
+
+
+{{-- 
+
 @extends('layouts.app')
 
 @section('content')
@@ -74,4 +179,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

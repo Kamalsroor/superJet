@@ -19,6 +19,10 @@ Route::get('/home', 'HomeController@index');
 Route::get('/job', 'HomeController@Jobs')->name('job');
 Route::get('/job/contact', 'HomeController@JobContent')->name('job.contact');
 Route::post('/job/contact', 'HomeController@JobContentStore')->name('job.JobContentStore');
+Route::get('/complaints', 'HomeController@Complaints')->name('complaints');
+Route::post('/complaints', 'HomeController@ComplaintsStore')->name('complaints.store');
+Route::get('/contact-us/{page}', 'HomeController@ContactUs')->name('ContactUs');
+Route::get('/about', 'HomeController@About')->name('about');
 
 // Route::get('/{lang}', function ($lang) {
 //     App::setLocale($lang);
