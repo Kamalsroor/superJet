@@ -2,10 +2,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'SuberJet') }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSRF Token -->
+    <link rel = "icon" type = "image/png" href = "{{ asset('storage/'.setting('site.logo'))}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- FONT CSS-->
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900">
@@ -33,6 +34,7 @@
     
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
     @if (Lang::locale() == 'ar')
+        <link href="https://fonts.googleapis.com/css?family=Lateef&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="{{ asset('assets/css/style-rtl.css') }}">
     @endif
 </head>

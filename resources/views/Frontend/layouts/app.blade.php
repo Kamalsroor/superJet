@@ -113,7 +113,7 @@
                                             </li>
                                         @else
                                             <li>
-                                                <a href="{{ route('lang','ar')}}" class="link">Arbic</a>
+                                                <a href="{{ route('lang','ar')}}" class="link">Arabic</a>
                                             </li>
                                         @endif
                                     </ul>
