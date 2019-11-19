@@ -34,7 +34,7 @@
     
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
     @if (Lang::locale() == 'ar')
-        <link href="https://fonts.googleapis.com/css?family=Lateef&display=swap" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="{{ asset('assets/css/style-rtl.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Amiri:700&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{ asset('assets/css/style-rtl.css') }}">
     @endif
 </head>
