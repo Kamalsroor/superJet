@@ -1,0 +1,83 @@
+@media (min-width: 768px){
+  .navbar-nav>li {
+      float: right;
+  }
+}
+.homepage-banner-warpper .homepage-banner-content {
+      display: table-cell;
+      vertical-align: middle;
+      direction: rtl;
+}
+.man-content{    direction: rtl;}
+.tab-search .tab-btn-wrapper:last-child .tab-btn {
+  -webkit-border-radius: 0 15px 0 0;
+  -moz-border-radius: 0 15px 0 0;
+}
+  .sbSelector {
+      display: block;
+      height: 40px;
+      left: 8px;
+      line-height: 40px;
+      outline: none;
+      overflow: hidden;
+      position: absolute;
+      text-indent: 10px;
+      top: 0;
+      width: 100%;
+}
+.timeline-location-block {
+      position: relative;
+      min-height: 250px;
+      padding: 30px 30px 20px 69px;
+      border-right: 2px solid #ffffff;
+      background-color: #fafafa;
+      text-align: right;
+}
+.videos.layout-1 .video-wrapper {
+      text-align: right;
+}
+.timeline-location-block .location-name .icon-marker {
+      position: absolute;
+      top: -5px;
+      right: -34px;
+      width: 25px;
+      height: 25px;
+      padding: 1.5%;
+      border: 1px solid;
+      border-radius: 50%;
+}
+.timeline-location-block .location-name .icon-marker {
+      position: absolute;
+      top: -5px;
+      right: -34px;
+      width: 25px;
+      height: 25px;
+      padding: 1.5%;
+      border: 1px solid;
+      border-radius: 50%;
+}
+.dropdown-menu-1 li .link-page, .dropdown-menu-2 li .link-page {
+      font-weight: normal;
+      line-height: 50px;
+      padding: 0 20px;
+      text-transform: capitalize;
+      color: #555e69;
+      text-align: right;
+}
+.cont-inner-two .form-control {
+      font-size: 14px;
+      line-height: 1.42857143;
+      display: block;
+      width: 100%;
+      text-align: right;
+      height: 34px;
+      padding: 6px 12px;
+      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+      color: #555555;
+      border: 1px solid #bd8e18;
+      border-radius: 5px !important;
+      margin-bottom: 13px;
+      background-color: #ffffff;
+      background-image: none;
+      box-shadow: none;
+  }

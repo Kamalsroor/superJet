@@ -30,5 +30,9 @@
     <!--link(type="text/css", rel='stylesheet', href='assets/css/color-1/color-1.css', id="color-skins")-->
     <link type="text/css" rel="stylesheet" href="#" id="color-skins">
     <script src="{{ asset('assets/libs/jquery/jquery-2.2.3.min.js') }}"></script>
+    
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}">
+    @if (Lang::locale() == 'ar')
+        <link type="text/css" rel="stylesheet" href="{{ asset('assets/css/style-rtl.css') }}">
+    @endif
 </head>

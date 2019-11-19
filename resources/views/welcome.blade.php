@@ -301,7 +301,7 @@
                                         <p class="text">GUARANTEED QUALITY</p>
                                         <i class="icons flaticon-people"></i>
                                     </div>
-                                    <h2 class="main-title">Recommended hotels</h2>
+                                    <h2 class="main-title">Recommended</h2>
                                 </div>
                                 <div class="hotels-content margin-top70">
                                     <div class="row hotels-list">

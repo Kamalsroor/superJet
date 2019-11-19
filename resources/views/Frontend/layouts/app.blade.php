@@ -175,7 +175,7 @@
                                         </li>
                                         <li class="{{active_link('about')}}">
                                             <a href="{{route('about')}}" class="main-menu">
-                                                <span class="text">SuperJet</span>
+                                                <span class="text">@lang('site.about')</span>
                                             </a>
                                         </li>
                                         <li>
@@ -185,27 +185,27 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void(0)" class="main-menu">
-                                                <span class="text">Lines</span>
+                                                <span class="text"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="javascript:void(0)" class="main-menu">
-                                                <span class="text">Book</span>
+                                                <span class="text">@lang('site.Book')</span>
                                             </a>
                                         </li>
                                         <li class="{{active_link('job')}}">
                                             <a href="{{route('job')}}" class="main-menu">
-                                                <span class="text">Jobs</span>
+                                                <span class="text">@lang('site.job')</span>
                                             </a>
                                         </li>
                                         <li class="{{active_link('complaints')}}">
                                             <a href="{{route('complaints')}}" class="main-menu">
-                                                <span class="text">Complaints and suggestions</span>
+                                                <span class="text">@lang('site.complaints')</span>
                                             </a>
                                         </li>
                                         <li class="dropdown">
                                             <a href="#" class="main-menu">
-                                                <span class="text">contact us</span>
+                                                <span class="text">@lang('site.contact')</span>
                                             </a>
                                             
                                             <ul class="dropdown-menu dropdown-menu-1">
