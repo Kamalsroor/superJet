@@ -9,10 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "ahmedsaoud31/arabic-laravel": "dev-master",
         "bread-form-fields": "dev-master",
         "bread-templates": "^1.0",
         "extended-bread-form-fields": "^0.2.0@beta",
         "fideloper/proxy": "^4.0",
+        "jenssegers/date": "^3.5",
         "larapack/hooks": "^1.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
