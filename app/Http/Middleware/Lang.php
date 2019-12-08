@@ -20,9 +20,6 @@ class Lang
         if (session()->has('lang')) {
             App::setLocale(session()->get('lang'));
         }
-       
-        // dd($trans);
-        #Auth::user()->Warehouse
         return $next($request);
     }
 }

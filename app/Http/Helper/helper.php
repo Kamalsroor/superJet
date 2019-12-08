@@ -1,19 +1,97 @@
 <?php
 
-if(!function_exists('aurl')){
+if (!function_exists('aurl')) {
     function aurl($url = null)
     {
-        return url('admin/'.$url);
+        return url('admin/' . $url);
     }
 }
 
-if(!function_exists('admin')){
+if (!function_exists('admin')) {
     function admin()
     {
         return Auth::guard('admin');
     }
 }
-if(!function_exists('paginate_collection')){
+
+if (!function_exists('GetRequest')) {
+    function GetRequest($method, $url)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_TIMEOUT => 30000,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_HTTPHEADER => array(
+                // Set Here Your Requesred Headers
+                'Content-Type: application/json',
+            ),
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        return json_decode($response);
+    }
+}
+if (!function_exists('GetRequestApi')) {
+    function getRandomString($length)
+    {
+        $salt = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9));
+        $maxIndex = count($salt) - 1;
+        $result = '';
+        for ($i = 0; $i < $length; $i++) {
+            $index = mt_rand(0, $maxIndex);
+            $result .= $salt[$index];
+        }
+        return $result;
+    }
+}
+
+if (!function_exists('GetRequestApi')) {
+    function GetRequestApi($method, $url, $data = null)
+    {
+        $curl = curl_init();
+        switch ($method) {
+            case "POST":
+                curl_setopt($curl, CURLOPT_POST, 1);
+                if ($data) {
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+                }
+
+                break;
+            case "PUT":
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+                if ($data) {
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                }
+
+                break;
+            default:
+                if ($data) {
+                    $url = sprintf("%s?%s", $url, http_build_query($data));
+                }
+
+        }
+        // OPTIONS:
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+        ]);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        // curl_setopt($curl, CURLOPT_USERPWD, "admin:admin");
+        // EXECUTE:
+        $result = curl_exec($curl);
+        if (!$result) {die("Connection Failure");}
+        curl_close($curl);
+        return json_decode($result);
+    }
+}
+
+if (!function_exists('paginate_collection')) {
     function paginate_collection($items_paginate, $data)
     {
         return new \Illuminate\Pagination\LengthAwarePaginator(
@@ -23,15 +101,16 @@ if(!function_exists('paginate_collection')){
             $items_paginate->currentPage(), [
                 'path' => \Request::url(),
                 'query' => [
-                    'page' => $items_paginate->currentPage()
-                ]
+                    'page' => $items_paginate->currentPage(),
+                ],
             ]
         );
     }
 }
 
 if (!function_exists('admin_link')) {
-    function admin_link($uri, $recursive = true, $class_name = 'active') {
+    function admin_link($uri, $recursive = true, $class_name = 'active')
+    {
         if ($recursive === true) {
             if ($uri === Request::segment(2)) {
                 return $class_name;
@@ -41,43 +120,45 @@ if (!function_exists('admin_link')) {
                 return $class_name;
             }
         }
-        return ''; 
+        return '';
     }
 }
 
 if (!function_exists('rolesName')) {
-    function rolesName() {
-        if (Request::segment(1) === 'admin')  {
+    function rolesName()
+    {
+        if (Request::segment(1) === 'admin') {
             return admin()->user()->name;
 
-        }else{
-            $test =[] ;
-            foreach (auth()->user()->roles()->pluck('name') as $role){
-                        $test[] += $role ;
-                    }
-            return  $test;
+        } else {
+            $test = [];
+            foreach (auth()->user()->roles()->pluck('name') as $role) {
+                $test[] += $role;
+            }
+            return $test;
         }
-        return ''; 
+        return '';
     }
 }
 
 if (!function_exists('name')) {
-    function name() {
-        if (Request::segment(1) === 'admin')  {
+    function name()
+    {
+        if (Request::segment(1) === 'admin') {
             return admin()->user()->name;
 
-        }else{
-            return  Auth::user()->name ;
+        } else {
+            return Auth::user()->name;
 
         }
 
-
-        return ''; 
+        return '';
     }
 }
 
 if (!function_exists('active_links')) {
-    function active_links($uris, $recursive = true, $class_name = 'active') {
+    function active_links($uris, $recursive = true, $class_name = 'active')
+    {
         foreach ($uris as $uri) {
             if ($recursive === true) {
                 if ($uri === Request::segment(1)) {
@@ -89,12 +170,13 @@ if (!function_exists('active_links')) {
                 }
             }
         }
-        return 'collapsed'; 
+        return 'collapsed';
     }
 }
 if (!function_exists('active_link')) {
-    function active_link($uri, $recursive = true, $class_name = 'active') {
-        
+    function active_link($uri, $recursive = true, $class_name = 'active')
+    {
+
         if ($recursive === true) {
             if ($uri === Request::segment(1)) {
                 return $class_name;
@@ -104,14 +186,13 @@ if (!function_exists('active_link')) {
                 return $class_name;
             }
         }
-        return ''; 
+        return '';
     }
 }
 
-
-
 if (!function_exists('show_ul')) {
-    function show_ul($uris, $recursive = true, $class_name = 'show') {
+    function show_ul($uris, $recursive = true, $class_name = 'show')
+    {
         foreach ($uris as $uri) {
             if ($recursive === true) {
                 if ($uri === Request::segment(1)) {
@@ -123,41 +204,36 @@ if (!function_exists('show_ul')) {
                 }
             }
         }
-        return ''; 
+        return '';
     }
 }
 
-
 if (!function_exists('fliter_arrays')) {
-    function fliter_arrays($columns) {
+    function fliter_arrays($columns)
+    {
         foreach ($columns as $column) {
-            foreach(request($column) as $kay1 => $value1 ){
-                $isLike = 0 ;
-                foreach(request($column) as $kay2 => $value2 ){
-                    if($value1 == $value2){ // مقارنه بين الانبوت
-                        $isLike++;  // اضافة رقم لو كان هناك تشابه
+            foreach (request($column) as $kay1 => $value1) {
+                $isLike = 0;
+                foreach (request($column) as $kay2 => $value2) {
+                    if ($value1 == $value2) { // مقارنه بين الانبوت
+                        $isLike++; // اضافة رقم لو كان هناك تشابه
                     }
-                    if($isLike > 1){ // لو الانبوت متشابهه
-                        return response()->json(['status' => false, 'message' => 'صح يبني'.$column.'اكتب الـ']);
+                    if ($isLike > 1) { // لو الانبوت متشابهه
+                        return response()->json(['status' => false, 'message' => 'صح يبني' . $column . 'اكتب الـ']);
                     }
                 }
             }
         }
-        return false ; // لو لا يوجد تشابه
+        return false; // لو لا يوجد تشابه
     }
 }
 
-
-
-
-
-
-
 if (!function_exists('lang')) {
-    function lang() {
-        if(session()->has('lang')){
+    function lang()
+    {
+        if (session()->has('lang')) {
             return session('lang');
-        }else{
+        } else {
             return 'en';
         }
 
@@ -165,14 +241,15 @@ if (!function_exists('lang')) {
 }
 
 if (!function_exists('dirs')) {
-    function dirs() {
-        if(session()->has('lang')){
-            if(session('lang') == 'ar'){
+    function dirs()
+    {
+        if (session()->has('lang')) {
+            if (session('lang') == 'ar') {
                 return 'rtl';
-            }elseif(session('lang') == 'en'){
+            } elseif (session('lang') == 'en') {
                 return 'ltr';
             }
-        }else{
+        } else {
             return 'ltr';
         }
 
@@ -180,138 +257,133 @@ if (!function_exists('dirs')) {
 }
 
 if (!function_exists('datatable_lang')) {
-    function datatable_lang() {
+    function datatable_lang()
+    {
         return ['
-                "sDecimal": '.trans('DataTables.decimal').',
-                "sEmptyTable": '.trans('DataTables.emptyTable').',
-                "sInfo": '.trans('DataTables.info').',
-                "sInfoEmpty": '.trans('DataTables.infoEmpty').',
-                "sInfoFiltered": '.trans('DataTables.infoFiltered').',
-                "sInfoPostFix": '.trans('DataTables.infoPostFix').',
-                "sThousands": '.trans('DataTables.thousands').',
-                "sLengthMenu": '.trans('DataTables.lengthMenu').',
-                "sLoadingRecords": '.trans('DataTables.loadingRecords').',
-                "sProcessing": '.trans('DataTables.processing').',
-                "sSearch": '.trans('DataTables.search').',
-                "sZeroRecords": '.trans('DataTables.zeroRecords').',
+                "sDecimal": ' . trans('DataTables.decimal') . ',
+                "sEmptyTable": ' . trans('DataTables.emptyTable') . ',
+                "sInfo": ' . trans('DataTables.info') . ',
+                "sInfoEmpty": ' . trans('DataTables.infoEmpty') . ',
+                "sInfoFiltered": ' . trans('DataTables.infoFiltered') . ',
+                "sInfoPostFix": ' . trans('DataTables.infoPostFix') . ',
+                "sThousands": ' . trans('DataTables.thousands') . ',
+                "sLengthMenu": ' . trans('DataTables.lengthMenu') . ',
+                "sLoadingRecords": ' . trans('DataTables.loadingRecords') . ',
+                "sProcessing": ' . trans('DataTables.processing') . ',
+                "sSearch": ' . trans('DataTables.search') . ',
+                "sZeroRecords": ' . trans('DataTables.zeroRecords') . ',
                 "sPaginate": {
-                    "sFirst": '.trans('DataTables.first').',
-                    "sLast": '.trans('DataTables.last').',
-                    "sNext": '.trans('DataTables.next').',
-                    "sPrevious": '.trans('DataTables.previous').',
+                    "sFirst": ' . trans('DataTables.first') . ',
+                    "sLast": ' . trans('DataTables.last') . ',
+                    "sNext": ' . trans('DataTables.next') . ',
+                    "sPrevious": ' . trans('DataTables.previous') . ',
                 },
                 "sAria": {
-                    "sSortAscending": '.trans('DataTables.sortAscending').',
-                    "sSortDescending": '.trans('DataTables.sortDescending').',
+                    "sSortAscending": ' . trans('DataTables.sortAscending') . ',
+                    "sSortDescending": ' . trans('DataTables.sortDescending') . ',
                 }
             '];
-   
+
     }
 }
-
-
 
 if (!function_exists('convertNumberToWord')) {
     function convertNumberToWord($num = false)
     {
-        
-        $num = str_replace(array(',', ' '), '' , trim($num));
-        if(! $num) {
+
+        $num = str_replace(array(',', ' '), '', trim($num));
+        if (!$num) {
             return false;
         }
         //$num = (int) $num; // ألرقم صحيح
         $num_floating = str_split($num, 2); // بيقسم كل 3 ارقام في array
         $flotCount = count($num_floating) - 1;
-        $flotNum = ltrim($num_floating[$flotCount],'.');
+        $flotNum = ltrim($num_floating[$flotCount], '.');
 
         $num = (int) $num; // ألرقم صحيح
         $words = array();
         $list1 = array('', 'واحد', 'اثنين', 'ثلاثه', 'اربعه', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة', 'عشرة', 'احدي عشر',
-            'اثناعشر', 'ثلاثة عشر', 'اربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'تسع عشر', 'عشرون'
+            'اثناعشر', 'ثلاثة عشر', 'اربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'تسع عشر', 'عشرون',
         );
         $list2 = array('', 'عشرة', 'عشرون', 'ثلاثون', 'اربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون', 'مائه');
-        $list3 = array('', 'الاف', 'مليون', 'بليون', 'بليار'
+        $list3 = array('', 'الاف', 'مليون', 'بليون', 'بليار',
         );
-        $list4 = array('', 'عشرة قروش', 'عشرون قرشاً', 'ثلاثون قرشاً', 'اربعون قرشاً', 'خمسون قرشاً', 'ستون قرشاً', 'سبعون قرشاً', 'ثمانون قرشاً', 'تسعون قرشاً'
+        $list4 = array('', 'عشرة قروش', 'عشرون قرشاً', 'ثلاثون قرشاً', 'اربعون قرشاً', 'خمسون قرشاً', 'ستون قرشاً', 'سبعون قرشاً', 'ثمانون قرشاً', 'تسعون قرشاً',
         );
-
 
         $num_length = strlen($num); // عدد الارقام
-        
+
         $levels = (int) (($num_length + 2) / 3); // المستوي
-        $max_length = $levels * 3; 
-        $num = substr('00' . $num, -$max_length); 
+        $max_length = $levels * 3;
+        $num = substr('00' . $num, -$max_length);
         $num_levels = str_split($num, 3); // بيقسم كل 3 ارقام في array
-        
+
         for ($i = 0; $i < count($num_levels); $i++) {
             $levels--; // بينقص واحد من المستوي
 
             $hundreds = (int) ($num_levels[$i] / 100); // بيقسم كل واحده من الarray علي 100
 
-            if($hundreds == 1){
+            if ($hundreds == 1) {
                 $hundreds = ($hundreds ? ' ' . ' مائه' . ' و' : '');
-                
-            }elseif($hundreds == 2){
-                $hundreds = ($hundreds ? ' '  . ' مئتان' . ' و' : '');
-                
-            }else{
+
+            } elseif ($hundreds == 2) {
+                $hundreds = ($hundreds ? ' ' . ' مئتان' . ' و' : '');
+
+            } else {
                 $hundreds = ($hundreds ? ' ' . $list1[$hundreds] . ' مائه' . ' و' : '');
-                
+
             }
             $tens = (int) ($num_levels[$i] % 100); // بتجيب الرقمين اللي ف الاول
 
-
             $singles = '';
-            if ( $tens < 20 ) { // لو هيا اقل من 20 بيجيب من ال list 1
-                if($tens == 1){
+            if ($tens < 20) { // لو هيا اقل من 20 بيجيب من ال list 1
+                if ($tens == 1) {
                     $tens = '';
                 }
-                $tens = ($tens ? ' ' . $list1[$tens] . ' ' : '' );
+                $tens = ($tens ? ' ' . $list1[$tens] . ' ' : '');
 
-                if( $levels && ( int ) ( $num_levels[$i] ) == 1){
-                    $tens = '' ;
+                if ($levels && (int) ($num_levels[$i]) == 1) {
+                    $tens = '';
                 }
-                if($levels == 1  ){
-                    if ( ( int ) ( $num_levels[$i]) == 2) {
-                        $tens = '' ;
-                    }elseif(( int ) ( $num_levels[$i] ) == 1){
-                        $tens = '' ;
+                if ($levels == 1) {
+                    if ((int) ($num_levels[$i]) == 2) {
+                        $tens = '';
+                    } elseif ((int) ($num_levels[$i]) == 1) {
+                        $tens = '';
                     }
                 }
 
             } else { // لو هيا اكثر من  20 بجيب من الlist 2
-                $tens =($tens / 10); // بيقسم علشان يجيب الرقم العشرات
+                $tens = ($tens / 10); // بيقسم علشان يجيب الرقم العشرات
 
                 $tens = ' ' . $list2[$tens] . ' '; //
 
                 $singles = (int) ($num_levels[$i] % 10);
 
-                $singles = ($singles ? ' ' . $list1[$singles] .  ' و' : '');
+                $singles = ($singles ? ' ' . $list1[$singles] . ' و' : '');
 
             }
 
-            if( $levels && ( int ) ( $num_levels[$i] ) == 1){
-                if($levels == 1){
-                    $mlion = ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . 'الف'  . ' و' : '' ;
-                }else{
-                    $mlion = ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels]  . ' و' : '' ;
+            if ($levels && (int) ($num_levels[$i]) == 1) {
+                if ($levels == 1) {
+                    $mlion = ($levels && (int) ($num_levels[$i])) ? ' ' . 'الف' . ' و' : '';
+                } else {
+                    $mlion = ($levels && (int) ($num_levels[$i])) ? ' ' . $list3[$levels] . ' و' : '';
                 }
-            }
-
-            else{
+            } else {
                 $mlion = '';
-                if($levels == 1  ){
-                    if ( ( int ) ( $num_levels[$i]) == 2) {
-                        $mlion = ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . 'الفان' . ' و' : '';
-                    }elseif(( int ) ( $num_levels[$i] ) == 1 || ( int ) ( $num_levels[$i] ) > 10 ){
-                        $mlion = ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . 'الف' . ' و' : '';
-                    }else{
-                        $mlion = ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels] . ' و' : '';
+                if ($levels == 1) {
+                    if ((int) ($num_levels[$i]) == 2) {
+                        $mlion = ($levels && (int) ($num_levels[$i])) ? ' ' . 'الفان' . ' و' : '';
+                    } elseif ((int) ($num_levels[$i]) == 1 || (int) ($num_levels[$i]) > 10) {
+                        $mlion = ($levels && (int) ($num_levels[$i])) ? ' ' . 'الف' . ' و' : '';
+                    } else {
+                        $mlion = ($levels && (int) ($num_levels[$i])) ? ' ' . $list3[$levels] . ' و' : '';
                     }
 
-                }else{
+                } else {
 
-                    $mlion = ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels] . ' و' : '';
+                    $mlion = ($levels && (int) ($num_levels[$i])) ? ' ' . $list3[$levels] . ' و' : '';
                 }
 
             }
@@ -323,32 +395,27 @@ if (!function_exists('convertNumberToWord')) {
         if ($commas > 1) {
             for ($i = 0; $i < count($words); $i++) {
 
-                if($words[$i] == ""){
+                if ($words[$i] == "") {
 
                     $commas = $i - 1;
 
-                    $str = rtrim($words[$commas],'و');
+                    $str = rtrim($words[$commas], 'و');
 
-                    $words[$commas] =  $str ;
-                    
+                    $words[$commas] = $str;
+
                 }
-           }
+            }
         }
 
-        
         $NoR = implode(' ', $words);
-        $FinshWords = rtrim($NoR,'و');
-        if($list4[$flotNum] == ""){
+        $FinshWords = rtrim($NoR, 'و');
+        if ($list4[$flotNum] == "") {
             return $FinshWords . 'جنيهاً';
 
-        }else{
-            return $FinshWords . 'جنيها و' .$list4[$flotNum];
+        } else {
+            return $FinshWords . 'جنيها و' . $list4[$flotNum];
 
         }
-
 
     }
 }
-
-
-

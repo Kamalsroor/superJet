@@ -48,7 +48,8 @@
                                                 <div role="tabpanel" id="busway" class="tab-pane fade in active">
                                                     <div class="find-widget find-flight-widget widget">
                                                         <h4 class="title-widgets">Book your seat now</h4>
-                                                                        <form class="content-widget">
+                                                        <form class="content-widget " action="{{ route('home.search')}}" method="POST" id="form-book">
+                                                            {{csrf_field()}}
                                                                 <div class="ffw-radio-selection">
 
                                                                     <div class="stretch">&nbsp;</div>
@@ -58,20 +59,20 @@
                                                                         <label class="tb-label">Form</label>
                                                                         <div class="select-wrapper">
                                                                             <!--i.fa.fa-chevron-down-->
-                                                                            <select class="form-control custom-select selectbox">
-                                                                                <option>dhab</option>
-                                                                                <option>aswan</option>
-                                                                                <option>cairo</option>
+                                                                            <select name="TripOfficeFrom_Code" id="TripOfficeFrom_Code" class="form-control input-lg select2 ">
+                                                                                @foreach ($Offices as $Office)
+                                                                                  <option value="{{$Office->Id}}" >{{$Office->Name}}</option>
+                                                                                @endforeach
 
                                                                             </select>
                                                                         </div>
                                                                         <label class="tb-label">To</label>
                                                                         <div class="select-wrapper">
                                                                             <!--i.fa.fa-chevron-down-->
-                                                                            <select class="form-control custom-select selectbox">
-                                                                                 <option>dhab</option>
-                                                                                <option>aswan</option>
-                                                                                <option>cairo</option>
+                                                                            <select name="TripOfficeTo_Code" id="TripOfficeTo_Code" class="form-control input-lg select2">
+                                                                                @foreach ($Offices as $Office)
+                                                                                    <option value="{{$Office->Id}}" >{{$Office->Name}}</option>
+                                                                                @endforeach
                                                                            </select>
                                                                         </div>
                                                                     </div>
@@ -79,15 +80,15 @@
                                                                         <div class="text-box-wrapper half">
                                                                             <label class="tb-label">Check in</label>
                                                                             <div class="input-group">
-                                                                                <input type="text" placeholder="MM/DD/YY" class="tb-input">
+                                                                                <input name="TripDateTimeFrom" id="TripDateTimeFrom" type="text" placeholder="MM/DD/YY" class="tb-input">
                                                                                 <i class="tb-icon fa fa-calendar input-group-addon"></i>
                                                                             </div>
                                                                         </div>
                                                                         <div class="text-box-wrapper half">
                                                                             <label class="tb-label">Check out</label>
-                                                                            <div class="a-link">
-                                                                              <a href="#">Choose Return Date</a>
-                                                                                <i class="fa fa-calendar"></i>
+                                                                            <div class="input-group">
+                                                                                <input name="TripDateTimeTo" id="TripDateTimeTo" type="text" placeholder="MM/DD/YY" class="tb-input">
+                                                                                <i class="tb-icon fa fa-calendar input-group-addon"></i>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -248,7 +249,7 @@
                                         {!!  setting('about.content-'.Lang::locale())!!}
                                     </div>
                                         <div class="group-button">
-    
+
                                         </div>
                                     </div>
                                 <div class="col-md-5">
@@ -314,7 +315,7 @@
                                                         </a>
                                                         <div class="title-wrapper">
                                                             <a href="hotel-view.html" class="title">{{$item->name}}</a>
-                                                         
+
                                                         </div>
                                                         {{-- <div class="label-sale">
                                                             <p class="text">sale</p>
@@ -323,7 +324,7 @@
                                                     </div>
                                                     <div class="content-wrapper">
                                                         <div class="content">
-                                                         
+
                                                             <p class="text">
                                                                 {{-- {{$item->getTranslatedAttribute('doc', 'locale', 'fallbackLocale')}} --}}
                                                                 {{$item->doc}}
@@ -331,7 +332,7 @@
 
                                                         </div>
                                                         <ul class="list-info list-unstyled">
-                                                            
+
                                                             <li>
                                                                 <a href="#" class="link">
                                                                     <i class="icons fa fa-wifi"></i>
@@ -379,7 +380,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                 
+
                                     </div>
                                     <a href="about-us.html" class="btn btn-transparent margin-top70">more BUS</a>
                                 </div>
@@ -422,4 +423,9 @@
                             </div>
                         </div>
                     </section>
+@endsection
+@section("script")
+<script src="{{ asset('assets/js/pages/home-page.js')}}"></script>
+    <script src="{{ asset('js/home.js')}}"></script>
+
 @endsection

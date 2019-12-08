@@ -23,6 +23,14 @@ Route::get('/complaints', 'HomeController@Complaints')->name('complaints');
 Route::post('/complaints', 'HomeController@ComplaintsStore')->name('complaints.store');
 Route::get('/contact-us/{page}', 'HomeController@ContactUs')->name('ContactUs');
 Route::get('/about', 'HomeController@About')->name('about');
+Route::post('/search', 'HomeController@Search')->name('home.search');
+Route::get('/search/{id}', 'HomeController@SearchBus')->name('home.bus');
+Route::post('/seeding', 'HomeController@SearchSeed')->name('seet.post');
+
+Route::get('/CancelAllSeat', 'HomeController@CancelAllSeat')->name('home.CancelAllSeat');
+Route::get('/SaveAllSeat', 'HomeController@SaveAllSeat')->name('home.SaveAllSeat');
+Route::get('/seedinfo/{id}', 'CheckOutController@getReservation')->name('home.seedinfo');
+
 
 // Route::get('/{lang}', function ($lang) {
 //     App::setLocale($lang);
@@ -42,7 +50,6 @@ Route::get('/about', 'HomeController@About')->name('about');
 
 
 Route::get('lang/{lang}', function($lang){
-    
     App::setLocale($lang);
     session()->put('lang', $lang);
     return redirect()->back();

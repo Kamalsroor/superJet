@@ -14,9 +14,11 @@
 <!-- MAIN JS-->
 <script src="{{ asset('assets/js/main.js')}}"></script>
 <!-- LOADING JS FOR PAGE-->
-<script src="{{ asset('assets/js/pages/home-page.js')}}"></script>
+
 <script src="{{ asset('assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.full.js" integrity="sha256-11NHM7fic+NUo/7Q21YmYgynxVS3PqOnvlU9iFp7NdQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/i18n/ar.js" integrity="sha256-7C04tHVSSMGTsiJpUEiMfhf+Xn4rRDqc3893SHtqTpg=" crossorigin="anonymous"></script>
 @if (Session::has('success'))
 <script>
         $.notify("{{Session::get('success')}}", "success");
@@ -28,8 +30,7 @@
 @yield('script')
 
 <script>
-var logo_str = 'assets/images/logo/logo-black-color-1.png';
-
+var logo_str = '{{ asset('assets/images/logo/logo-black-color-1.png')}}';
         window.loading_screen = window.pleaseWait(
         {
                 logo: logo_str,

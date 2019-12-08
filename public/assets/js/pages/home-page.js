@@ -161,7 +161,7 @@ jQuery(function($) {
         if($(".input-daterange").length || $(".date .tb-input").length) {
             // DATE PICKER
             $('.input-daterange, .date .tb-input').datepicker({
-                format: 'mm/dd/yy',
+                format: 'yyyy-mm-dd',
                 maxViewMode: 0,
                 autoclose: true
             });

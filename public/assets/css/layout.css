@@ -3566,3 +3566,19 @@ footer .widget .title-widget {
 /*==============================
  =======  End of FOOTER  =======
 ==============================*/
+
+span#select2-TripOfficeFrom_Code-container {
+    color: #3c3c3c;
+}
+
+span#select2-TripOfficeTo_Code-container {
+    color: #3c3c3c;
+}
+
+input#TripDateTimeFrom {
+    color: #3c3c3c;
+}
+
+input#TripDateTimeTo {
+    color: #3c3c3c;
+}
