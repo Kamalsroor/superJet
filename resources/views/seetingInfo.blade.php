@@ -229,7 +229,7 @@ use Arabic\Arabic;
 						Checkout.configure({
     					merchant   : {!! $merchantID !!},
     					order      : {
-        				amount     : "{!! json_encode($order_amount)!!}",
+        				amount     : {!! json_encode($order_amount)!!},
         				currency   : {!! json_encode($order_currency)!!},
         				description: 'Hosted Checkout Test Order - Return to Merchant - PHP/JavaScript/NVP',
         				id				 : {!! json_encode($order_id)!!},
