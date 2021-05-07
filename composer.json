@@ -16,7 +16,7 @@
         "fideloper/proxy": "^4.0",
         "jenssegers/date": "^3.5",
         "larapack/hooks": "^1.0",
-        "laravel/framework": "5.8.*",
+        "laravel/framework": "6.18.*",
         "laravel/tinker": "^1.0",
         "tcg/voyager": "^1.3",
         "voyager-bread-generator": "dev-master"
